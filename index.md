@@ -50,7 +50,7 @@ The Table shows per each year (rows), the following data from Barcelona, accordi
 3. Rate of number of deaths within the amount of population in Barcelona, corresponding to the same age groups (TX01_14,TX15_44,TX45_74,TX75_XX,TXTOTAL)
 4. Confidence Interval (IC95)
 5. Comparative Mortality Ratio (RMC)
-6. Standardized mortality rate ponderated with the population of Barcelona in the year 1996 (TSTDTOTAL)
+6. Standardized mortality rate balanced with the population of Barcelona in the year 1996 (TSTDTOTAL)
 
 ---
 
@@ -65,7 +65,7 @@ The Table shows pear each main Cause of Death Group (17 groups and TOTAL in rows
 3. Comparative Mortality Ratio (RMC)
 4. Percent of number of deaths within the Cause of death (PCTTOTAL)
 5. Rate of number of deaths within the amount of population in Barcelona (TXOTAL)
-6. Standardized mortality rate ponderated with the population of Barcelona in the year 1996 (TSTDTOTAL) 
+6. Standardized mortality rate balanced with the population of Barcelona in the year 1996 (TSTDTOTAL) 
 
 ---
 
