@@ -1,0 +1,106 @@
+---
+title       : Mortality in Barcelona
+subtitle    : Course Project 
+author      : Pere Llimona
+job         : Course Project for Developing Data Products MOOC Coursera
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap,quiz]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Introduction
+
+Displaying the Mortality in Barcelona using an Excel dataset containing data from Mortality in Barcelona from years 2001 to 2011  (6589 rows), perform a visualization of data from two perspectives: 
+
+1. Evolution of mortality in Barcelona showing all years, according to District and Sex values selected in the sidebar panel combo boxes.
+2. Mortality in Barcelona per Cause of death, according to Year, District and Sex selected values in the sidebar panel combo boxes.
+3. Calculate and visualize the of mean Comparative Mortality Ratio for each Cause of Death:
+```{r,echo = FALSE, results='hide'}
+options(java.parameters = "-Xmx512m")
+require(XLConnect)
+#Open Excel only once!
+excel.file <- file.path("FontA_B.xls")
+elements <- readWorksheetFromFile(excel.file,sheet=1)
+#Clean RAM 
+xlcFreeMemory()
+detach("package:XLConnect", unload=TRUE)
+
+myset<-{subset(elements,YEAR=="2011" & UGEO=="Ciutat Vella" & SEXE=="Both")}
+#myset[c('CAUSA','TSTDTOTAL','TOTAL','IC95','RMC')]
+
+#Replace rare chars for na
+myset$RMC[myset$RMC == "-"] <- NA
+myset$RMC<- as.numeric(myset$RMC)
+```
+```{r,echo=TRUE,results='hide'}
+#Calculation of mean of Comparative Mortality Ratio
+meanrmc <-mean(myset$RMC, na.rm = TRUE)
+```
+
+---
+
+## Histogram of Comparative Mortality Ratio
+
+CMR Cause of Death when selected values Year:2011, District:Ciutat Vella, Sex:Both
+```{r,echo=FALSE}
+meanrmc <-mean(myset$RMC, na.rm = TRUE)
+      hist(myset$RMC, xlab='CMR Cause of Death', col = 'lightblue', main= 'Comparative Mortality Ratio for Cause of death',ylab='Frequency')
+      abline(v = meanrmc, col = "red")
+      text(30 + round(meanrmc,2),5,paste("mean(rmc) = ", round(meanrmc,2)),col = "red")
+      #h1$save('histogramRMC.html',cdn=TRUE) 
+```
+
+---
+
+## Evolution of Mortality in Barcelona (Panel 1)
+
+The Graph displays the evolution of standardized rates per year in Barcelona starting from year 2001 to 2011, and according to the selected District and Sex on the sidebar panel combo boxes.
+The Table shows per each year (rows), the following data from Barcelona, according to the selected District and Sex on the sidebar panel combo boxes; by columns:
+
+1. The given year (YEAR) 
+2. Number of deaths by age group: from 0 to 14 years old (N01_14), from 15 to 44 (N15_44), from 45 to 74 (N45_44), more than 75 years old (N75_XX), and from all ages (TOTAL)
+3. Rate of number of deaths within the amount of population in Barcelona, corresponding to the same age groups (TX01_14,TX15_44,TX45_74,TX75_XX,TXTOTAL)
+4. Confidence Interval (IC95)
+5. Comparative Mortality Ratio (RMC)
+6. Standardized mortality rate ponderated with the population of Barcelona in the year 1996 (TSTDTOTAL)
+
+---
+
+## Cause of Death (Panel 2)
+
+The Graph displays an histogram or frequency distribution of values for Comparative Mortality Ratio (RMC), in Barcelona, according to the selected Year, District and Sex on the sidebar panel combo boxes. It also depicts in a red line the mean value for Comparative Mortality Ratio.
+
+The Table shows pear each main Cause of Death Group (17 groups and TOTAL in rows), the following data from Barcelona, according to the selected Year, District and Sex on the sidebar panel combo boxes; by columns:
+
+1. The given Cause of Death(CauseOfDeath) 
+2. Confidence Interval (IC95)
+3. Comparative Mortality Ratio (RMC)
+4. Percent of number of deaths within the Cause of death (PCTTOTAL)
+5. Rate of number of deaths within the amount of population in Barcelona (TXOTAL)
+6. Standardized mortality rate ponderated with the population of Barcelona in the year 1996 (TSTDTOTAL) 
+
+---
+
+## Appendix: The Data Set
+
+Data organized according to the following columns:
+
+1. Years from 2001 to 2011 (Year)
+2. The given Cause of Death (CauseOfDeath) 
+3. Number of deaths by age group: from 0 to 14 years old (N01_14), from 15 to 44 (N15_44), from 45 to 74 (N45_44), more than 75 years old (N75_XX), and from all ages (TOTAL)
+4. Rate of number of deaths within the amount of population in Barcelona, corresponding to the same age groups (TX01_14, TX15_44, TX45_74, TX75_XX, TXTOTAL)
+5. Confidence Interval (IC95)
+6. Comparative Mortality Ratio (RMC)
+7. Percent of number of deaths within the Cause of death (PCTTOTAL)
+8. Standardized mortality rate balanced with the population of Barcelona in the year 1996 (TSTDTOTAL) 
+
+---
+
+## Appendix: Sample of data for the Histogram
+
+```{r,echo=FALSE}
+myset[c('CauseOfDeath','RMC')]
+```

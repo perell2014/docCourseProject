@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mortality in Barcelona</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Mortality in Barcelona">
+  <meta name="author" content="Pere Llimona">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Mortality in Barcelona</h1>
+    <h2>Course Project</h2>
+    <p>Pere Llimona<br/>Course Project for Developing Data Products MOOC Coursera</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Introduction</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Displaying the Mortality in Barcelona using an Excel dataset containing data from Mortality in Barcelona from years 2001 to 2011  (6589 rows), perform a visualization of data from two perspectives: </p>
+
+<ol>
+<li>Evolution of mortality in Barcelona showing all years, according to District and Sex values selected in the sidebar panel combo boxes.</li>
+<li>Mortality in Barcelona per Cause of death, according to Year, District and Sex selected values in the sidebar panel combo boxes.</li>
+<li>Calculate and visualize the of mean Comparative Mortality Ratio for each Cause of Death:</li>
+</ol>
+
+<pre><code>## Loading required package: XLConnect
+## XLConnect 0.2-7 by Mirai Solutions GmbH
+## http://www.mirai-solutions.com ,
+## http://miraisolutions.wordpress.com
+</code></pre>
+
+<pre><code class="r">#Calculation of mean of Comparative Mortality Ratio
+meanrmc &lt;-mean(myset$RMC, na.rm = TRUE)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Histogram of Comparative Mortality Ratio</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>CMR Cause of Death when selected values Year:2011, District:Ciutat Vella, Sex:Both
+<img src="figure/unnamed-chunk-3.png" alt="plot of chunk unnamed-chunk-3"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Evolution of Mortality in Barcelona (Panel 1)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The Graph displays the evolution of standardized rates per year in Barcelona starting from year 2001 to 2011, and according to the selected District and Sex on the sidebar panel combo boxes.
+The Table shows per each year (rows), the following data from Barcelona, according to the selected District and Sex on the sidebar panel combo boxes; by columns:</p>
+
+<ol>
+<li>The given year (YEAR) </li>
+<li>Number of deaths by age group: from 0 to 14 years old (N01_14), from 15 to 44 (N15_44), from 45 to 74 (N45_44), more than 75 years old (N75_XX), and from all ages (TOTAL)</li>
+<li>Rate of number of deaths within the amount of population in Barcelona, corresponding to the same age groups (TX01_14,TX15_44,TX45_74,TX75_XX,TXTOTAL)</li>
+<li>Confidence Interval (IC95)</li>
+<li>Comparative Mortality Ratio (RMC)</li>
+<li>Standardized mortality rate ponderated with the population of Barcelona in the year 1996 (TSTDTOTAL)</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Cause of Death (Panel 2)</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The Graph displays an histogram or frequency distribution of values for Comparative Mortality Ratio (RMC), in Barcelona, according to the selected Year, District and Sex on the sidebar panel combo boxes. It also depicts in a red line the mean value for Comparative Mortality Ratio.</p>
+
+<p>The Table shows pear each main Cause of Death Group (17 groups and TOTAL in rows), the following data from Barcelona, according to the selected Year, District and Sex on the sidebar panel combo boxes; by columns:</p>
+
+<ol>
+<li>The given Cause of Death(CauseOfDeath) </li>
+<li>Confidence Interval (IC95)</li>
+<li>Comparative Mortality Ratio (RMC)</li>
+<li>Percent of number of deaths within the Cause of death (PCTTOTAL)</li>
+<li>Rate of number of deaths within the amount of population in Barcelona (TXOTAL)</li>
+<li>Standardized mortality rate ponderated with the population of Barcelona in the year 1996 (TSTDTOTAL) </li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Appendix: The Data Set</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Data organized according to the following columns:</p>
+
+<ol>
+<li>Years from 2001 to 2011 (Year)</li>
+<li>The given Cause of Death (CauseOfDeath) </li>
+<li>Number of deaths by age group: from 0 to 14 years old (N01_14), from 15 to 44 (N15_44), from 45 to 74 (N45_44), more than 75 years old (N75_XX), and from all ages (TOTAL)</li>
+<li>Rate of number of deaths within the amount of population in Barcelona, corresponding to the same age groups (TX01_14, TX15_44, TX45_74, TX75_XX, TXTOTAL)</li>
+<li>Confidence Interval (IC95)</li>
+<li>Comparative Mortality Ratio (RMC)</li>
+<li>Percent of number of deaths within the Cause of death (PCTTOTAL)</li>
+<li>Standardized mortality rate balanced with the population of Barcelona in the year 1996 (TSTDTOTAL) </li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Appendix: Sample of data for the Histogram</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code>##                                                    CauseOfDeath   RMC
+## 6031                       I. Infectious and parasitic diseases 149.5
+## 6032                                                II. Tumours 115.4
+## 6033           III. Blood&#39;s and hematopoietics organ&#39;s diseases  46.6
+## 6034                        IV. Endocrine/nutritional disorders  95.8
+## 6035                              V. Neuropsychiatric disorders 127.1
+## 6036             VI. Nervous system&#39;s and sense organs diseases  92.1
+## 6037                           VII. Circulatory System Diseases 113.1
+## 6038                                 VIII. Respiratory diseases 185.0
+## 6039                                     IX. Digestive diseases 133.8
+## 6040                X. Skin&#39;s and subcutaneous tissues diseases 261.2
+## 6041      XI. Musculoskeletal&#39;s and connective tissues diseases 181.7
+## 6042                  XII. Diseases of the genitourinary system 148.3
+## 6043          XIII. Complicacions de l&#39;embaràs, part i puerperi    NA
+## 6044     XIV. Some illnesses originated in the perinatal period 134.6
+## 6045 XV. Congenital malformations and chromosomal abnormalities 213.1
+## 6046        XVI. Symptoms, signs and affections wrongly defined 158.8
+## 6047                        XVII. External causes of mortalitat 105.1
+## 6048                                                      TOTAL 122.7
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Introduction'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Histogram of Comparative Mortality Ratio'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Evolution of Mortality in Barcelona (Panel 1)'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Cause of Death (Panel 2)'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Appendix: The Data Set'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Appendix: Sample of data for the Histogram'>
+         6
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+<script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+
+  <script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
